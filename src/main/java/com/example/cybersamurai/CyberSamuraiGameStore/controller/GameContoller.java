@@ -28,7 +28,7 @@ public class GameContoller {
 	StorageService storageService;
 
 	@Autowired
-	CategoryService categoryServie;
+	CategoryService categoryService;
 
 	@Autowired
 	PlatformService platformService;
@@ -40,7 +40,7 @@ public class GameContoller {
 
 	@GetMapping("/game/category/{category_id}")
 	public ResponseEntity<?> getGamesByCategory(@PathVariable("category_id") int categoryID) {
-		Category category = categoryServie.get(categoryID);
+		Category category = categoryService.get(categoryID);
 		if (category == null) {
 			return ResponseEntity.badRequest().body("Category ID is invalid");
 		}
@@ -89,6 +89,12 @@ public class GameContoller {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok().contentType(contentType).body(fileBytes);
+	}
+	
+	@GetMapping(value = "/game/wish_list")
+	public ResponseEntity<Game> getWishListedGame(int wish_list) {
+		Game game = gameService.get(wish_list);
+		return ResponseEntity.ok().body(game);
 	}
 
 	@GetMapping(value = "/game/high_sells")

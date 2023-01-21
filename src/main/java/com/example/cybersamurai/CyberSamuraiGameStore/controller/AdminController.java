@@ -22,6 +22,7 @@ import com.example.cybersamurai.CyberSamuraiGameStore.entity.Category;
 import com.example.cybersamurai.CyberSamuraiGameStore.entity.Game;
 import com.example.cybersamurai.CyberSamuraiGameStore.entity.Platform;
 import com.example.cybersamurai.CyberSamuraiGameStore.entity.User;
+import com.example.cybersamurai.CyberSamuraiGameStore.entity.WishList;
 import com.example.cybersamurai.CyberSamuraiGameStore.entity.Record;
 import com.example.cybersamurai.CyberSamuraiGameStore.service.CategoryService;
 import com.example.cybersamurai.CyberSamuraiGameStore.service.GameService;
@@ -29,6 +30,7 @@ import com.example.cybersamurai.CyberSamuraiGameStore.service.PlatformService;
 import com.example.cybersamurai.CyberSamuraiGameStore.service.RecordService;
 import com.example.cybersamurai.CyberSamuraiGameStore.service.StorageService;
 import com.example.cybersamurai.CyberSamuraiGameStore.service.UserService;
+import com.example.cybersamurai.CyberSamuraiGameStore.service.WishListService;
 
 
 
@@ -53,6 +55,9 @@ public class AdminController {
 	
 	@Autowired
 	PlatformService platformService;
+	
+	@Autowired
+	WishListService wishlistService;
 
 	// ------------------- Game
 
@@ -177,6 +182,13 @@ public class AdminController {
 	@GetMapping("/record")
 	public List<Record> listRecord() {
 		return recordService.getAll();
+	}
+	
+	// ------------------- Wishlist
+	
+	@GetMapping("/wishlist")
+	public List<WishList> listWishList() {
+		return wishlistService.getAll();
 	}
 
 	// ------------------- Category

@@ -6,6 +6,7 @@ import com.example.cybersamurai.CyberSamuraiGameStore.entity.User;
 import com.example.cybersamurai.CyberSamuraiGameStore.entity.UserRole;
 import com.example.cybersamurai.CyberSamuraiGameStore.entity.UserStatus;
 import com.example.cybersamurai.CyberSamuraiGameStore.service.CategoryService;
+import com.example.cybersamurai.CyberSamuraiGameStore.service.EmailSenderServiceImpl;
 import com.example.cybersamurai.CyberSamuraiGameStore.service.PlatformService;
 import com.example.cybersamurai.CyberSamuraiGameStore.service.StorageService;
 import com.example.cybersamurai.CyberSamuraiGameStore.service.UserService;
@@ -15,6 +16,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -25,6 +28,14 @@ public class CyberSamuraiGameStoreApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(CyberSamuraiGameStoreApplication.class, args);
 	}
+
+//	@Autowired
+//	private EmailSenderServiceImpl senderService;
+//	
+//	@EventListener(ApplicationReadyEvent.class)
+//	public void sendMail() {
+//		senderService.sendEmail("heinhtetzin11122000@gmail.com", "This is a subject", "This is Body");
+//	}
 
 	@Autowired
 	UserService userService;
@@ -49,7 +60,7 @@ public class CyberSamuraiGameStoreApplication implements CommandLineRunner {
 
 		if (ddlMode.equals("create")) {
 
-			userService.create(new User(1, "Admin", "1111", "admin@gmail.com", UserStatus.active, UserRole.admin,
+			userService.create(new User(1, "Admin", "1111", "haynesart11@gmail.com", UserStatus.active, UserRole.admin,
 					LocalDate.now(), null, 0, LocalDateTime.now(), null));
 			categoryService.create(new Category(1, "Action"));
 			categoryService.create(new Category(2, "Action-Adventure"));

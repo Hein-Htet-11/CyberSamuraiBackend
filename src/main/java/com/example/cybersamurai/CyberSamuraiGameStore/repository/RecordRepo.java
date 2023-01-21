@@ -10,8 +10,6 @@ import com.example.cybersamurai.CyberSamuraiGameStore.entity.User;
 import com.example.cybersamurai.CyberSamuraiGameStore.entity.Game;
 import com.example.cybersamurai.CyberSamuraiGameStore.entity.Record;
 
-
-
 @EnableJpaRepositories
 public interface RecordRepo extends JpaRepository<Record, Integer> {
 	

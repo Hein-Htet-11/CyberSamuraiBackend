@@ -92,4 +92,15 @@ public class GameServiceImpl implements GameService {
 		return gameRepo.findByNewlyAdded(game_id);
 	}
 
+	@Override
+	public Game wish_list(int id, int wishList) {
+		Game wishListedGame = this.get(id);
+		if (wishListedGame == null) {
+			return null;
+		}
+		wishListedGame.setWishList(wishList);
+		gameRepo.save(wishListedGame);
+		return wishListedGame;
+	}
+
 }

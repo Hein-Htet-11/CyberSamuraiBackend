@@ -15,6 +15,8 @@ public interface GameService {
 	public Game create(Game game);
 
 	public Game update(int id, Game game);
+	
+	public Game wish_list(int id, int wishList);
 
 	public boolean delete(int id);
 

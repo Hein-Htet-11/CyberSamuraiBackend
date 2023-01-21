@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.cybersamurai.CyberSamuraiGameStore.entity.ChangePassword;
 import com.example.cybersamurai.CyberSamuraiGameStore.entity.LoginRequest;
 import com.example.cybersamurai.CyberSamuraiGameStore.entity.User;
+import com.example.cybersamurai.CyberSamuraiGameStore.service.EmailSenderServiceImpl;
 import com.example.cybersamurai.CyberSamuraiGameStore.service.UserService;
 
 
@@ -32,6 +33,9 @@ public class UserController {
 
 	@Autowired
 	PasswordEncoder pwEncoder;
+	
+	@Autowired
+	private EmailSenderServiceImpl senderService;
 
 	@PostMapping("/login")
 	public ResponseEntity<User> login(
@@ -52,6 +56,11 @@ public class UserController {
 			return ResponseEntity.badRequest()
 					.body("User with same gmail already exists!");
 		}
+		
+		senderService.sendEmail(user.getGmail(), "Cyber Samurai account Created Successfully", "Thanks for joining Cybersamurai community. "
+				+ "You have successfully registered an account for Cyber Samurai Game Store Webiste. "
+				+ "We are looking forward to see you.");
+		System.out.println("Msg sent successfully");
 		return ResponseEntity.ok().body(createdUser);
 	}
 
@@ -88,6 +97,9 @@ public class UserController {
 			);
 		}
 		userService.updatePwd(user.getId(), changePwd.getNew_pwd());
+		senderService.sendEmail(user.getGmail(), "Change Password Successfully", "You have changed your password. "
+				+ "If it isn't you, please send us mail back. "
+				+ "We hope you have a good day.");
 		return ResponseEntity.ok().body(user);
 	}
 
